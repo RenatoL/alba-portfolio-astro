@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro';
+import albaProfile from "/src/assets/pictures/alba.jpg";
+---
+
+<Layout title="Alba's Portfolio">
+	<body>
+		<div class="container">
+			<div class="section section-a" tabindex="0">
+				<span class="letter">A</span>
+				<span class="letter hidden">bout me</span>
+
+				<div class="flex hidden about">
+
+					<p>Hi! I'm Alba Lily Phillips!</p>
+
+					<p>This is my about me section!</p>
+
+					<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+					<p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."</p>
+				</div>
+			</div>
+			
+			<div class="section section-l" tabindex="1">
+				<span class="letter">L</span>
+				<span class="letter hidden">Lookbook</span>
+			</div>
+			
+			<div class="section section-b" tabindex="2">
+				<span class="letter">B</span>
+				<span class="letter hidden">roadcasts</span>
+				<div class="description">CREATIVE DOCUMENTARY PRODUCER</div>
+			</div>
+			
+			<div class="section section-a" tabindex="3">
+				<span class="letter">A</span>
+				<span class="letter hidden">sk me</span>
+			</div>
+		</div>
+	</body>
+</Layout>
+
+<style
+define:vars={{ image: `url(${albaProfile.src})` }}
+>
+
+	body {
+		width: 100%;
+		height: 100vh;
+		background-color: #f8f0f0;
+	}
+
+	p {
+		padding: 0.5rem;
+	}
+
+	.container {
+		display: flex;
+		width: 100%;
+		height: 100vh;
+	}
+
+	.section {
+		min-width: 10%;
+		width: 25%;
+		position: relative;
+		padding: 2rem;
+		border-right: 1px solid #e5e5e5;
+		transition:width 1s 0s ease-in-out;
+		text-wrap: nowrap;
+	}
+
+	.letter {
+		font-family: var(--font-heading);
+		font-weight: var(--weight-bold);
+		font-size: 6rem;
+		letter-spacing: -0.02em;
+	}
+
+	.section-a:focus{
+		width:200%;
+    	outline:0;
+	}
+	
+	/* L Section with image */
+	.section-l {
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.section-l::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: var(--image);
+		background-size: cover;
+		background-position: center;
+		filter: contrast(1.2) brightness(0.9);
+	}
+
+	.section-l::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #002FA7;
+		opacity: 0.2;
+		mix-blend-mode: color;
+	}
+
+	.section-l:focus {
+		width:200%;
+		outline:0;
+	}
+
+	.section-l .letter {
+		position: absolute;
+		top: 2rem;
+		left: 2rem;
+		color: white;
+		mix-blend-mode: normal;
+		z-index: 2;
+	}
+
+	.section-b:focus{
+		width:200%;
+    	outline:0;
+	}
+
+	.section .hidden {
+		display: none;
+	}
+
+	.section:focus-within .hidden{
+		display: inline;
+		animation: fade-in 2s;
+	}
+
+	.section:not(:focus-within) .hidden.did-fade-in {
+		display: inline;
+		animation: fade-out 1s;
+	}
+
+	@keyframes fade-in {
+		from {opacity: 0;}
+		to {opacity: 1;	}
+	}
+
+	@keyframes fade-out {
+		from {	opacity: 1;	}
+		to {opacity: 0;	}
+	}
+
+	/* Description text */
+	.description {
+		margin-top: 2rem;
+		font-family: var(--font-body);
+		font-weight: var(--weight-regular);
+		font-size: 0.875rem;
+		max-width: 15rem;
+		letter-spacing: 0.05em;
+		text-wrap: wrap;
+	}
+
+	.about {
+		margin-top: 2rem;
+		font-family: var(--font-body);
+		font-weight: var(--weight-regular);
+		font-size: 1.5rem;
+		max-width: 15rem;
+		letter-spacing: 0.05em;
+		text-wrap: wrap;
+	}
+
+	/* Typography Classes */
+	.subheading {
+		font-family: var(--font-heading);
+		font-weight: var(--weight-light);
+	}
+
+	.button {
+		font-family: var(--font-body);
+		font-weight: var(--weight-medium);
+	}
+
+	.caption {
+		font-family: var(--font-body);
+		font-weight: var(--weight-light);
+		font-size: 0.75rem;
+	}
+
+	/* Remove border from last section */
+	.section:last-child {
+		border-right: none;
+	}
+</style>
+
+<script>
+// We need to keep track of faded in elements so we can apply fade out later in CSS
+document.addEventListener('animationstart', function (e) {
+  if (e.animationName === 'fade-in') {
+      e.target.classList.add('did-fade-in');
+  }
+});
+
+document.addEventListener('animationend', function (e) {
+  if (e.animationName === 'fade-out') {
+      e.target.classList.remove('did-fade-in');
+   }
+});
+
+</script>
+

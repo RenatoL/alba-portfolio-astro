@@ -1,0 +1,78 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alba - Documentary Producer</title>
+ 
+</head>
+<slot/>
+</html>
+<style is:global>
+
+@font-face {
+    font-family: 'JacquesFrancois';
+    src: url('/fonts/JacquesFrancois-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	:root {
+		/* Typography Scale */
+		--font-heading: "PlayfairDisplay", system-ui, sans-serif;
+		--font-body: "Inter", system-ui, sans-serif;
+		--weight-bold: 700;
+		--weight-light: 300;
+		--weight-regular: 400;
+		--weight-medium: 500;
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background: #13151a;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+
+
+</style>
