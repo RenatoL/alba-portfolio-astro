@@ -80,11 +80,11 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		position: relative;
 		padding: 2rem;
 		border-right: 1px solid #e5e5e5;
-		transition:width 1s 0s ease-in-out;
+		transition:width 1s 0s ease-in-out;                                                                                   
+		text-wrap: nowrap;  
 	}
 
-	.section .letter {                                                                                           
-         text-wrap: nowrap;                                                                                       
+	.section .letter {                                                                                             
      }                
 
 	.letter {
@@ -132,11 +132,12 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		padding: 1rem;
 		width: 100%;
 		height: calc(100vh - 12rem);
-		overflow-y: auto;
+		overflow-x: scroll; 
+		overflow-y: scroll;
 		column-gap: 1rem;
 		scrollbar-width: thick;
 		scrollbar-color: rgba(255,255,255,0.5) transparent;
-		text-wrap: normal;
+		text-wrap: wrap !important;
 	}
 
 	.gallery::-webkit-scrollbar {
@@ -172,7 +173,7 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 			transform: translateY(10px);
 		}
 		to {
-			opacity: 0.9;
+			opacity: 1;
 			transform: translateY(0);
 		}
 	}
