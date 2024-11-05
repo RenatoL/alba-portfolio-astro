@@ -13,7 +13,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 				<span class="letter">A</span>
 				<span class="letter hidden">bout me</span>
 
-				<div class="flex hidden about">
+				<div class="hidden about">
 
 					<p>Hi! I'm Alba Lily Phillips!</p>
 
@@ -81,8 +81,11 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		padding: 2rem;
 		border-right: 1px solid #e5e5e5;
 		transition:width 1s 0s ease-in-out;
-		text-wrap: nowrap;
 	}
+
+	.section .letter {                                                                                           
+         text-wrap: nowrap;                                                                                       
+     }                
 
 	.letter {
 		font-family: var(--font-heading);
