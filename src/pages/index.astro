@@ -140,11 +140,13 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	.section:focus-within .hidden{
 		display: inline;
 		animation: fade-in 2s;
+		-webkit-animation: fade-in 2s;
 	}
 
 	.section:not(:focus-within) .hidden.did-fade-in {
 		display: inline;
 		animation: fade-out 1s;
+		-webkit-animation: fade-out 1s;
 	}
 
 	@keyframes fade-in {
@@ -155,6 +157,11 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	@keyframes fade-out {
 		from {	opacity: 1;	}
 		to {opacity: 0;	}
+	}
+
+	@-webkit-keyframes fade-out {
+		from {	opacity: 1;	}
+		to { opacity: 0;	}
 	}
 
 	/* Description text */
