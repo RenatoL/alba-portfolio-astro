@@ -5,13 +5,14 @@ export interface Props {
   thumbnailUrl: string;
   videoUrl: string;
   posterUrl?: string;
+  videoProvider?: string;
 }
 
 const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
 ---
 
 <div class="video-container">
-  <div class="video-content" data-video-provider={videoProvider} data-video-id={videoId}>
+  <div class="video-content">
     <div class="thumbnail-overlay">
       <img src={thumbnailUrl} alt={title} />
       <button class="play-button" aria-label="Play video">
@@ -24,7 +25,6 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
         preload="metadata"
         poster={posterUrl || thumbnailUrl}
         tabindex="-1"
-        onmousedown="event.preventDefault()"
       >
         <source src={videoUrl} type="video/mp4">
         Your browser does not support the video tag.
