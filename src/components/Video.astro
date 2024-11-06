@@ -1,31 +1,31 @@
 ---
-export interface Props {
-  title: string;
-  description: string;
-  thumbnailUrl: string;
-  videoUrl: string;
-  videoProvider: 'youtube' | 'vimeo' | 'imdb';
-}
+export interface Props {                                                                                         
+   title: string;                                                                                                 
+   description: string;                                                                                           
+   thumbnailUrl: string;                                                                                          
+   videoUrl: string;                                                                                              
+   videoProvider: 'youtube' | 'vimeo' | 'imdb';                                                                   
+ } 
 
 const { title, description, thumbnailUrl, videoUrl, videoProvider } = Astro.props;
 
 // Extract video ID based on provider
-const getVideoId = (url: string, provider: string) => {
-  if (provider === 'youtube') {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : null;
-  } else if (provider === 'vimeo') {
-    const regExp = /vimeo\.com\/([0-9]+)/;
-    const match = url.match(regExp);
-    return match ? match[1] : null;
-  } else if (provider === 'imdb') {
-    const regExp = /\/video\/([a-zA-Z0-9]+)/;
-    const match = url.match(regExp);
-    return match ? match[1] : null;
-  }
-  return null;
-};
+const getVideoId = (url: string, provider: string) => {                                                          
+   if (provider === 'youtube') {                                                                                  
+     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;                               
+     const match = url.match(regExp);                                                                             
+     return match && match[2].length === 11 ? match[2] : null;                                                    
+   } else if (provider === 'vimeo') {                                                                             
+     const regExp = /vimeo\.com\/([0-9]+)/;                                                                       
+     const match = url.match(regExp);                                                                             
+     return match ? match[1] : null;                                                                              
+   } else if (provider === 'imdb') {                                                                              
+     const regExp = /\/video\/([a-zA-Z0-9]+)/;                                                                    
+     const match = url.match(regExp);                                                                             
+     return match ? match[1] : null;                                                                              
+   }                                                                                                              
+   return null;                                                                                                   
+ };
 
 const videoId = getVideoId(videoUrl, videoProvider);
 ---
@@ -82,7 +82,7 @@ const videoId = getVideoId(videoUrl, videoProvider);
   .thumbnail {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit:scale-down;
     transition: transform 0.3s ease;
   }
 
@@ -191,9 +191,9 @@ const videoId = getVideoId(videoUrl, videoProvider);
           embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         } else if (provider === 'vimeo') {
           embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
-        } else if (provider === 'imdb') {
-          embedUrl = `https://www.imdb.com/video/imdb/${videoId}/imdb/embed?autoplay=true`;
-        }
+        } else if (provider === 'imdb') {                                                                        
+           embedUrl = `https://www.imdb.com/video/imdb/${videoId}/imdb/embed?autoplay=true`;                      
+         } 
 
         videoEmbed.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;"></iframe>`;
         modal.style.display = 'block';
