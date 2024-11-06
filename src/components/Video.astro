@@ -1,33 +1,13 @@
 ---
-export interface Props {                                                                                         
-   title: string;                                                                                                 
-   description: string;                                                                                           
-   thumbnailUrl: string;                                                                                          
-   videoUrl: string;                                                                                              
-   videoProvider: 'youtube' | 'vimeo' | 'imdb';                                                                   
- } 
+export interface Props {
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  videoUrl: string;
+  posterUrl?: string;
+}
 
-const { title, description, thumbnailUrl, videoUrl, videoProvider } = Astro.props;
-
-// Extract video ID based on provider
-const getVideoId = (url: string, provider: string) => {                                                          
-   if (provider === 'youtube') {                                                                                  
-     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;                               
-     const match = url.match(regExp);                                                                             
-     return match && match[2].length === 11 ? match[2] : null;                                                    
-   } else if (provider === 'vimeo') {                                                                             
-     const regExp = /vimeo\.com\/([0-9]+)/;                                                                       
-     const match = url.match(regExp);                                                                             
-     return match ? match[1] : null;                                                                              
-   } else if (provider === 'imdb') {                                                                              
-     const regExp = /\/video\/([a-zA-Z0-9]+)/;                                                                    
-     const match = url.match(regExp);                                                                             
-     return match ? match[1] : null;                                                                              
-   }                                                                                                              
-   return null;                                                                                                   
- };
-
-const videoId = getVideoId(videoUrl, videoProvider);
+const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
 ---
 
 <div class="video-container">
@@ -39,39 +19,16 @@ const videoId = getVideoId(videoUrl, videoProvider);
       </button>
     </div>
     <div id="embed" class="video-embed hidden">
-      {videoProvider === 'youtube' && 
-        <iframe 
-          src={`https://www.youtube.com/embed/${videoId}`}
-          title={title}
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          tabindex="-1"
-          onmousedown="event.preventDefault()"
-        ></iframe>
-      }
-      {videoProvider === 'vimeo' && 
-        <iframe 
-          src={`https://player.vimeo.com/video/${videoId}`}
-          title={title}
-          frameborder="0" 
-          allow="autoplay; fullscreen; picture-in-picture" 
-          allowfullscreen
-          tabindex="-1"
-          onmousedown="event.preventDefault()"
-        ></iframe>
-      }
-      {videoProvider === 'imdb' && 
-        <iframe 
-          src={`https://www.imdb.com/video/imdb/${videoId}/imdb/embed`}
-          title={title}
-          frameborder="0" 
-          allow="autoplay; fullscreen" 
-          allowfullscreen
-          tabindex="-1"
-          onmousedown="event.preventDefault()"
-        ></iframe>
-      }
+      <video 
+        controls
+        preload="metadata"
+        poster={posterUrl || thumbnailUrl}
+        tabindex="-1"
+        onmousedown="event.preventDefault()"
+      >
+        <source src={videoUrl} type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
   <div class="video-info">
@@ -199,10 +156,21 @@ const videoId = getVideoId(videoUrl, videoProvider);
     });
   });
 
-  const embed = document.getElementById("embed").addEventListener('click', function(e) {
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('click', function(e) {
       e.preventDefault();
       return true;
     });
+    
+    // Prevent space bar from scrolling page when video is focused
+    video.addEventListener('keydown', function(e) {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (this.paused) this.play();
+        else this.pause();
+      }
+    });
+  });
 
 </script>
 
