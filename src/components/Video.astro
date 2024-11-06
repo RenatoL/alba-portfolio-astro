@@ -159,6 +159,11 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
   document.querySelectorAll('video').forEach(video => {
     video.addEventListener('click', function(e) {
       e.preventDefault();
+      // Keep focus on parent section
+      const section = this.closest('.section');
+      if (section) {
+        section.focus();
+      }
       return true;
     });
     
@@ -168,6 +173,19 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
         e.preventDefault();
         if (this.paused) this.play();
         else this.pause();
+        // Keep focus on parent section
+        const section = this.closest('.section');
+        if (section) {
+          section.focus();
+        }
+      }
+    });
+
+    // Maintain section focus when video receives focus
+    video.addEventListener('focus', function(e) {
+      const section = this.closest('.section');
+      if (section) {
+        section.focus();
       }
     });
   });
