@@ -46,6 +46,8 @@ const videoId = getVideoId(videoUrl, videoProvider);
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen
+          tabindex="-1"
+          onmousedown="event.preventDefault()"
         ></iframe>
       }
       {videoProvider === 'vimeo' && 
@@ -55,6 +57,8 @@ const videoId = getVideoId(videoUrl, videoProvider);
           frameborder="0" 
           allow="autoplay; fullscreen; picture-in-picture" 
           allowfullscreen
+          tabindex="-1"
+          onmousedown="event.preventDefault()"
         ></iframe>
       }
       {videoProvider === 'imdb' && 
@@ -64,6 +68,8 @@ const videoId = getVideoId(videoUrl, videoProvider);
           frameborder="0" 
           allow="autoplay; fullscreen" 
           allowfullscreen
+          tabindex="-1"
+          onmousedown="event.preventDefault()"
         ></iframe>
       }
     </div>
