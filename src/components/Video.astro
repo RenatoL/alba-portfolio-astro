@@ -179,9 +179,16 @@ const videoId = getVideoId(videoUrl, videoProvider);
       const thumbnail = content.querySelector('.thumbnail-overlay');
       const videoEmbed = content.querySelector('.video-embed');
       
-      thumbnail?.addEventListener('click', () => {
+      thumbnail?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         thumbnail.style.display = 'none';
         videoEmbed?.classList.remove('hidden');
+        // Keep focus on the parent section
+        const section = content.closest('.section');
+        if (section) {
+          section.focus();
+        }
       });
     });
   });
