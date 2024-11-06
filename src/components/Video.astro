@@ -31,34 +31,42 @@ const videoId = getVideoId(videoUrl, videoProvider);
 ---
 
 <div class="video-container">
-  <div class="video-content">
-    {videoProvider === 'youtube' && 
-      <iframe 
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title={title}
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen
-      ></iframe>
-    }
-    {videoProvider === 'vimeo' && 
-      <iframe 
-        src={`https://player.vimeo.com/video/${videoId}`}
-        title={title}
-        frameborder="0" 
-        allow="autoplay; fullscreen; picture-in-picture" 
-        allowfullscreen
-      ></iframe>
-    }
-    {videoProvider === 'imdb' && 
-      <iframe 
-        src={`https://www.imdb.com/video/imdb/${videoId}/imdb/embed`}
-        title={title}
-        frameborder="0" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen
-      ></iframe>
-    }
+  <div class="video-content" data-video-provider={videoProvider} data-video-id={videoId}>
+    <div class="thumbnail-overlay">
+      <img src={thumbnailUrl} alt={title} />
+      <button class="play-button" aria-label="Play video">
+        <svg width="68" height="48" viewBox="0 0 68 48"><path class="play-button-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"></path><path class="play-button-icon" d="M 45,24 27,14 27,34"></path></svg>
+      </button>
+    </div>
+    <div class="video-embed hidden">
+      {videoProvider === 'youtube' && 
+        <iframe 
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title={title}
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+        ></iframe>
+      }
+      {videoProvider === 'vimeo' && 
+        <iframe 
+          src={`https://player.vimeo.com/video/${videoId}`}
+          title={title}
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          allowfullscreen
+        ></iframe>
+      }
+      {videoProvider === 'imdb' && 
+        <iframe 
+          src={`https://www.imdb.com/video/imdb/${videoId}/imdb/embed`}
+          title={title}
+          frameborder="0" 
+          allow="autoplay; fullscreen" 
+          allowfullscreen
+        ></iframe>
+      }
+    </div>
   </div>
   <div class="video-info">
     <h3>{title}</h3>
@@ -78,15 +86,65 @@ const videoId = getVideoId(videoUrl, videoProvider);
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  .video-content iframe {
+  .thumbnail-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .thumbnail-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .play-button:hover .play-button-bg {
+    fill: #ff0000;
+  }
+
+  .play-button-bg {
+    fill: rgba(33, 33, 33, 0.8);
+    transition: fill 0.1s ease;
+  }
+
+  .play-button-icon {
+    fill: #ffffff;
+  }
+
+  .video-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .hidden {
+    display: none;
   }
 
   .video-info {
@@ -112,4 +170,20 @@ const videoId = getVideoId(videoUrl, videoProvider);
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoContents = document.querySelectorAll('.video-content');
+    
+    videoContents.forEach(content => {
+      const thumbnail = content.querySelector('.thumbnail-overlay');
+      const videoEmbed = content.querySelector('.video-embed');
+      
+      thumbnail?.addEventListener('click', () => {
+        thumbnail.style.display = 'none';
+        videoEmbed?.classList.remove('hidden');
+      });
+    });
+  });
+</script>
 
