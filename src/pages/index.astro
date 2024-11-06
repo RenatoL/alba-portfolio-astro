@@ -1,8 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Form from '../components/Form.astro'
-
 import albaProfile from "/src/assets/pictures/alba.jpg";
+import Video from '../components/Video.astro';
 // Add image collection
 const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 ---
@@ -46,6 +45,15 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 				<span class="letter">B</span>
 				<span class="letter hidden">Productions</span>
 				<div class="description">Alba Lily Phillips, Producer (Unscripted)</div>
+				<div class="broadcasts-content hidden">
+					<Video
+						title="Sample Documentary"
+						description="A glimpse into the creative process behind the scenes of documentary filmmaking."
+						thumbnailUrl="/src/assets/pictures/alba.jpg"
+						videoUrl="https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID"
+						videoProvider="youtube"
+					/>
+				</div>
 			</div>
 			
 			<div class="section section-a" tabindex="3">
@@ -233,6 +241,13 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	.section-b:focus{
 		width:200%;
     	outline:0;
+	}
+
+	.broadcasts-content {
+		margin-top: 2rem;
+		width: 100%;
+		overflow-y: auto;
+		max-height: calc(100vh - 12rem);
 	}
 
 
