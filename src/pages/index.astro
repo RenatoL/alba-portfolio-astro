@@ -27,7 +27,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			</div>
 			
 			<div class="section section-l" tabindex="1">
-				<span class="letter">L</span>
+				<span class="letter hide">L</span>
 				<span class="letter hidden">Gallery</span>
 				<div class="gallery hidden">
 					{galleryImages.map((image) => (
@@ -42,7 +42,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			</div>
 			
 			<div class="section section-b" tabindex="2">
-				<span class="letter">B</span>
+				<span class="letter hide">B</span>
 				<span class="letter hidden">Productions</span>
 				<div class="description">Alba Lily Phillips, Producer (Unscripted)</div>
 				<div class="broadcasts-content hidden">
@@ -99,7 +99,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			</div>
 			
 			<div class="section section-a" tabindex="3">
-				<span class="letter">A</span>
+				<span class="letter hide">A</span>
 				<span class="letter hidden">Contact</span>
 				<div class="hidden about">
 				<p>For business enquiries, please contact me at:</p>
@@ -155,8 +155,9 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		display: none;
 	}
 
-	.section .letter {                                                                                             
-     }                
+	.section:focus-within .letter.hide {
+		display: none;
+	}
 
 	.letter {
 		font-family: var(--font-heading);
