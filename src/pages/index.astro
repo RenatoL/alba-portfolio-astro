@@ -53,12 +53,10 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 				<div class="hidden about">
 				<p>For business enquiries, please contact me at:</p>
 
-				<h3>hello@albalilyphillips.com</h3>
-				<a href="mailto:hello@albalilyphillips.com">Send me an email!</a>
+				
+				<a href="mailto:hello@albalilyphillips.com">hello@albalilyphillips.com</a>
 
-				<p>or fill out the contact form below to send me a message!</p>
 				</div>
-				<div class="hidden"><Form/></div>
 			</div>
 		</div>
 	</body>
@@ -76,6 +74,15 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 
 	p {
 		padding: 0.5rem;
+	}
+
+	a {
+		color: transparent;
+		background-clip: text;
+		background-image: linear-gradient(90deg, #6AAEC5 0%, #5AC9BF 25%, #DDDD39 50%, #DDDD39 75%, #EA44A7 100%);
+		outline: 1px;
+		-webkit-text-stroke: black;
+		-webkit-text-stroke-width: 1px;
 	}
 
 	.container {
