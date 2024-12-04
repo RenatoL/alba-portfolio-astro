@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import albaProfile from "/src/assets/pictures/alba.jpg";
 import Video from '../components/Video.astro';
+import ResetButton from '../components/ResetButton.astro';
 // Add image collection
 const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 ---
@@ -9,6 +10,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 <Layout title="Alba's Portfolio">
 	<body>
 		<div class="container">
+		  <ResetButton />
 			<div class="section section-a" tabindex="0">
 				<span class="letter">A</span>
 				<span class="letter hidden">bout me</span>
