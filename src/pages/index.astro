@@ -118,6 +118,13 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 <style
 define:vars={{ image: `url(${albaProfile.src})` }}
 >
+  /* Mobile-first breakpoints */
+  :root {
+    --mobile: 320px;
+    --tablet: 768px;
+    --desktop: 1024px;
+    --large-desktop: 1440px;
+  }
 
 	body {
 		width: 100%;
@@ -142,16 +149,43 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		display: flex;
 		width: 100%;
 		height: 100vh;
+		flex-direction: column;
+	}
+
+	@media (min-width: 768px) {
+		.container {
+			flex-direction: row;
+		}
 	}
 
 	.section {
-		min-width: 10%;
-		width: 25%;
+		min-width: 100%;
+		width: 100%;
 		position: relative;
-		padding: 2rem;
-		border-right: 1px solid #e5e5e5;
-		transition:width 1s 0s ease-in-out;                                                                                   
-		text-wrap: nowrap;  
+		padding: 1rem;
+		border-bottom: 1px solid #e5e5e5;
+		transition: all 1s 0s ease-in-out;
+		text-wrap: nowrap;
+		height: 25vh;
+	}
+
+	@media (min-width: 768px) {
+		.section {
+			min-width: 10%;
+			width: 25%;
+			height: 100vh;
+			padding: 2rem;
+			border-right: 1px solid #e5e5e5;
+			border-bottom: none;
+		}
+	}
+
+	/* Adjust expanded sections */
+	@media (max-width: 767px) {
+		.section:focus-within {
+			height: 85vh !important;
+			width: 100% !important;
+		}
 	}
 	.section .hidden {
 		display: none;
@@ -164,8 +198,20 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	.letter {
 		font-family: var(--font-heading);
 		font-weight: var(--weight-bold);
-		font-size: 6rem;
+		font-size: 3rem;
 		letter-spacing: -0.02em;
+	}
+
+	@media (min-width: 768px) {
+		.letter {
+			font-size: 4rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.letter {
+			font-size: 6rem;
+		}
 	}
 
 	.section-a:focus-within{
@@ -201,13 +247,29 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	/* Gallery styles */
 	.gallery {
 		position: absolute;
-		column-count: 3;
+		column-count: 1;
 		z-index: 3;
-		margin-top: 12rem;
+		margin-top: 8rem;
 		padding: 1rem;
 		width: 100%;
-		column-gap: 1rem;
+		column-gap: 0.5rem;
 		text-wrap: wrap !important;
+	}
+
+	@media (min-width: 768px) {
+		.gallery {
+			column-count: 2;
+			margin-top: 10rem;
+			column-gap: 0.75rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.gallery {
+			column-count: 3;
+			margin-top: 12rem;
+			column-gap: 1rem;
+		}
 	}
 
 	.gallery::-webkit-scrollbar {
@@ -291,10 +353,31 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	}
 
 	.broadcasts-content {
-		margin-top: 2rem;
+		margin-top: 1rem;
 		width: 100%;
 		overflow-y: auto;
-		max-height: calc(100vh - 12rem);
+		max-height: calc(100vh - 8rem);
+	}
+
+	@media (min-width: 768px) {
+		.broadcasts-content {
+			margin-top: 2rem;
+			max-height: calc(100vh - 12rem);
+		}
+	}
+
+	.about {
+		margin-top: 1rem;
+		font-size: 1rem;
+		max-width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		.about {
+			margin-top: 2rem;
+			font-size: 1.5rem;
+			max-width: 15rem;
+		}
 	}
 
 
@@ -366,6 +449,21 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 </style>
 
 <script>
+  // Add touch support
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => {
+    section.addEventListener('touchstart', function(e) {
+      this.focus();
+    }, { passive: true });
+  });
+
+  // Prevent scroll issues on mobile
+  document.addEventListener('touchmove', function(e) {
+    const focused = document.querySelector('.section:focus-within');
+    if (focused && !focused.contains(e.target)) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 // We need to keep track of faded in elements so we can apply fade out later in CSS
 document.addEventListener('animationstart', function (e) {
   if (e.animationName === 'fade-in') {
