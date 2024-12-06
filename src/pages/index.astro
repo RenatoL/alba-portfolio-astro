@@ -515,29 +515,54 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 </style>
 
 <script>
-  // Track gallery image loading
-  const galleryImages = document.querySelectorAll('.gallery-item');
+  // Initialize loading tracking
   let loadedImages = 0;
+  let totalImages = 0;
 
   function updateLoadingProgress() {
-    const progress = (loadedImages / galleryImages.length) * 100;
+    if (totalImages === 0) return; // Avoid division by zero
+    const progress = (loadedImages / totalImages) * 100;
     window.loadingOverlay?.setProgress(progress);
     
-    if (loadedImages === galleryImages.length) {
+    if (loadedImages >= totalImages) {
       window.loadingOverlay?.hide();
     }
   }
 
-  galleryImages.forEach(img => {
-    if (img.complete) {
-      loadedImages++;
-      updateLoadingProgress();
-    } else {
-      img.addEventListener('load', () => {
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const allImages = document.querySelectorAll('img');
+    totalImages = allImages.length;
+    
+    if (totalImages === 0) {
+      window.loadingOverlay?.hide();
+      return;
+    }
+
+    allImages.forEach(img => {
+      if (img.complete) {
         loadedImages++;
         updateLoadingProgress();
-      });
-    }
+      } else {
+        img.addEventListener('load', () => {
+          loadedImages++;
+          updateLoadingProgress();
+        });
+        img.addEventListener('error', () => {
+          loadedImages++;
+          updateLoadingProgress();
+          console.error('Failed to load image:', img.src);
+        });
+      }
+    });
+
+    // Fallback to hide overlay after 10 seconds
+    setTimeout(() => {
+      if (document.getElementById('loading-overlay')) {
+        console.warn('Loading overlay timeout - forcing hide');
+        window.loadingOverlay?.hide();
+      }
+    }, 10000);
   });
 
   // Add touch support
