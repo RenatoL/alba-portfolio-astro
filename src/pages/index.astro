@@ -514,6 +514,7 @@ define:vars={{ image: `url(${albaProfile.src})` }}
   // Initialize loading tracking
   let loadedImages = 0;
   let totalImages = 0;
+  let imagesStartedLoading = false;
 
   function updateLoadingProgress() {
     if (totalImages === 0) return; // Avoid division by zero
@@ -525,32 +526,51 @@ define:vars={{ image: `url(${albaProfile.src})` }}
     }
   }
 
+  function preloadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedImages++;
+        updateLoadingProgress();
+        resolve(img);
+      };
+      img.onerror = () => {
+        loadedImages++;
+        updateLoadingProgress();
+        console.error('Failed to load image:', src);
+        reject(new Error(`Failed to load image: ${src}`));
+      };
+      img.src = src;
+    });
+  }
+
   // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', () => {
-    const allImages = document.querySelectorAll('img');
-    totalImages = allImages.length;
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Collect all image sources to preload
+    const galleryImages = Array.from(document.querySelectorAll('.gallery-item')).map(img => img.src);
+    const thumbnailImages = Array.from(document.querySelectorAll('.production-content img')).map(img => img.src);
+    const profileImage = document.querySelector('.section-l')?.style.backgroundImage.replace(/^url\(['"](.+)['"]\)$/, '$1');
+    
+    const imagesToLoad = [...new Set([
+      ...galleryImages,
+      ...thumbnailImages,
+      profileImage
+    ].filter(Boolean))];
+
+    totalImages = imagesToLoad.length;
+    imagesStartedLoading = true;
     
     if (totalImages === 0) {
       window.loadingOverlay?.hide();
       return;
     }
 
-    allImages.forEach(img => {
-      if (img.complete) {
-        loadedImages++;
-        updateLoadingProgress();
-      } else {
-        img.addEventListener('load', () => {
-          loadedImages++;
-          updateLoadingProgress();
-        });
-        img.addEventListener('error', () => {
-          loadedImages++;
-          updateLoadingProgress();
-          console.error('Failed to load image:', img.src);
-        });
-      }
-    });
+    // Start preloading all images
+    try {
+      await Promise.all(imagesToLoad.map(src => preloadImage(src)));
+    } catch (error) {
+      console.warn('Some images failed to load:', error);
+    }
 
     // Fallback to hide overlay after 10 seconds
     setTimeout(() => {
