@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import albaProfile from "/src/assets/pictures/alba.jpg";
-import Video from '../components/Video.astro';
+import Productions from '../components/Productions.astro';
 import ResetButton from '../components/ResetButton.astro';
 import { basename } from 'path';
 // Add image collection
@@ -70,7 +70,7 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 				<span class="letter hidden">Productions</span>
 				<div class="description">Alba Lily Phillips, Producer (Unscripted)</div>
 				<div class="broadcasts-content hidden">
-					<Video
+					<Productions
 					title="Eva Longoria: Searching for Spain, CNN"
 					description="Producer, Hyphenate / Dragonfly, 2024"
 					thumbnailUrl="/src/assets/pictures/promos/Eva Longoria Searching for Spain Promo.png"
