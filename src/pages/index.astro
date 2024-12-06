@@ -3,8 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import albaProfile from "/src/assets/pictures/alba.jpg";
 import Video from '../components/Video.astro';
 import ResetButton from '../components/ResetButton.astro';
+import { basename } from 'path';
 // Add image collection
 const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
+
+// Define custom image order
+const imageOrder = [
+  "Searching for Spain Eva Longoria Madrid Team Photo",
+  "Searching for Spain Eva Longoria Catalonia Team Photo", 
+  "Searching for Spain Eva Longoria Mexico City Team Photo",
+  // Add more filenames here to control order
+];
+
+// Sort gallery images based on defined order
+const sortedGalleryImages = galleryImages.sort((a, b) => {
+  const aName = basename(a.default.src, '.jpg');
+  const bName = basename(b.default.src, '.jpg');
+  return imageOrder.indexOf(aName) - imageOrder.indexOf(bName);
+});
 ---
 
 <Layout title="Alba's Portfolio">
@@ -32,7 +48,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 				<span class="letter hide">L</span>
 				<span class="letter hidden">Gallery</span>
 				<div class="gallery hidden">
-					{galleryImages.map((image) => {
+					{sortedGalleryImages.map((image) => {
 						const filename = image.default.src.split('/').pop().split('.')[0];
 						return (
 							<div class="gallery-item-container">
