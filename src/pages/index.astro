@@ -30,8 +30,10 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 		<div class="container">
 		  <ResetButton />
 			<div class="section section-a" tabindex="0">
-				<span class="letter">A</span>
-				<span class="letter hidden">bout me</span>
+				<div class="letter-container">
+					<span class="letter">A</span>
+					<span class="letter hidden">bout me</span>
+				</div>
 
 				<div class="hidden about">
 
@@ -50,8 +52,10 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 			</div>
 			
 			<div class="section section-l" tabindex="1">
-				<span class="letter hide">L</span>
-				<span class="letter hidden">Gallery</span>
+				<div class="letter-container">
+					<span class="letter hide">L</span>
+					<span class="letter hidden">Gallery</span>
+				</div>
 				<div class="gallery hidden">
 					{sortedGalleryImages.map((image) => {
 						const filename = image.default.src.split('/').pop().split('.')[0];
@@ -71,8 +75,10 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 			</div>
 			
 			<div class="section section-b" tabindex="2">
-				<span class="letter hide">B</span>
-				<span class="letter hidden">Productions</span>
+				<div class="letter-container">
+					<span class="letter hide">B</span>
+					<span class="letter hidden">Productions</span>
+				</div>
 				<div class="description hide">Alba Lily Phillips, Producer (Unscripted)</div>
 				<div class="broadcasts-content hidden">
 					<Productions
@@ -128,8 +134,10 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 			</div>
 			
 			<div class="section section-a" tabindex="3">
-				<span class="letter hide">A</span>
-				<span class="letter hidden">Contact</span>
+				<div class="letter-container">
+					<span class="letter hide">A</span>
+					<span class="letter hidden">Contact</span>
+				</div>
 				<div class="hidden about">
 				<p>For business enquiries, please contact me at:</p>
 
