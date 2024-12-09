@@ -10,7 +10,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 
 // Define custom image order
 const imageOrder = [
-  "Searching for Spain Eva Longoria Madrid Team Photo",
+  "Hot Air Balloon scene on BBC1’s “Anton & Giovanni's Adventures in Spain”",
   "Searching for Spain Eva Longoria Catalonia Team Photo", 
   "Searching for Spain Eva Longoria Mexico City Team Photo",
   // Add more filenames here to control order
@@ -35,10 +35,17 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 
 				<div class="hidden about">
 
-					<p>Hello! Born and raised in London to a Spanish mum and British dad, I grew up bilingual and spent my childhood holidays with family in Spain. I then studied French and Portuguese at university and have since lived, traveled and worked in France, Portugal, Spain, Brazil and Mexico. As an Unscripted TV & Film Producer, I’ve been lucky enough to work in the worlds of Specialist Factual Documentaries and Factual Entertainment. This work has allowed me to dive into tonnes of diverse topics—from the thrilling highs of sports and science, to the exclusive world of fashion, and niches such as horticulture and haute cuisine. My credits include work for the BBC, ITV, Channel 4, CNN, Disney+, Sky, ARTE and Discovery. </p>
+					<p>Hello! Born and raised in London to a Spanish mum and British dad, I grew up bilingual and spent my childhood holidays with family in Spain. 
+						I then studied French and Portuguese at university and have since lived, traveled and worked in France, Portugal, Spain, Brazil and Mexico. 
+						As an Unscripted TV & Film Producer, I’ve been lucky enough to work in the worlds of Specialist Factual Documentaries and Factual Entertainment. 
+						This work has allowed me to dive into tonnes of diverse topics—from the thrilling highs of sports and science, to the exclusive world of fashion, 
+						and niches such as horticulture and haute cuisine. My credits include work for the BBC, ITV, Channel 4, CNN, Disney+, Sky, ARTE and Discovery. </p>
 
 					<p>
-						Every project is a new adventure, whether I’m setting up an international shoot on a remote farm in Oaxaca, researching food stories from Francoist Spain, or engineering travel routes for game show contestants, I’m energised by every stage of production. Each project brings with it a new story to tell, new people to meet and lessons to learn. The process of pulling together compelling stories to educate and entertain is what motivates me.</p>
+						Every project is a new adventure, whether I’m setting up an international shoot on a remote farm in Oaxaca, researching food stories from Francoist Spain, 
+						or engineering travel routes for game show contestants, I’m energised by every stage of production. Each project brings with it a new story to tell, 
+						new people to meet and lessons to learn. The process of pulling together compelling stories to educate and entertain is what motivates me.
+					</p>
 				</div>
 			</div>
 			
@@ -331,9 +338,7 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		background: rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(8px);
 		color: #f8f0f0;
-		font-size: 1.5rem;
-		/* -webkit-text-stroke: 1px black;
-		text-stroke: 1px black; */
+		font-size: 1.25rem;
 		transform: translateY(100%);
 		transition: transform 0.3s ease 0.15s;
 		border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -394,17 +399,17 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		animation: fade-in 0.5s ease-in-out;
 	}
 
-	.section-l:focus-within::after {
-		/* opacity: 0.2; */
+	.section .letter {
+		top: 2rem;
+		left: 2rem;
+		z-index: 2;
+		animation: fade-in 0.75s ease-in-out;
 	}
 
 	.section-l .letter {
 		position: absolute;
-		top: 2rem;
-		left: 2rem;
 		color: white;
 		mix-blend-mode: normal;
-		z-index: 2;
 	}
 
 	.section-b:focus{
@@ -451,8 +456,8 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 
 	.section:not(:focus-within) .hidden.did-fade-in {
 		display: inline;
-		animation: fade-out 1s;
-		-webkit-animation: fade-out 1s;
+		animation: fade-out 0.25s;
+		-webkit-animation: fade-out 0.25s;
 	}
 
 	@keyframes fade-in {
