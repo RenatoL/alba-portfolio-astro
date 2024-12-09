@@ -73,7 +73,7 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 			<div class="section section-b" tabindex="2">
 				<span class="letter hide">B</span>
 				<span class="letter hidden">Productions</span>
-				<div class="description">Alba Lily Phillips, Producer (Unscripted)</div>
+				<div class="description hide">Alba Lily Phillips, Producer (Unscripted)</div>
 				<div class="broadcasts-content hidden">
 					<Productions
 					title="Eva Longoria: Searching for Spain, CNN"
@@ -218,9 +218,9 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		display: none;
 	}
 
-	.section:focus-within .letter.hide {
-		opacity: 0;
-		transition: opacity 0.5s ease-out;
+	.section:focus-within .hide {
+		display: none;
+		transition: fade-out 2s ease-out;
 	}
 
 	.letter {
@@ -451,14 +451,20 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 
 	.section:focus-within .hidden{
 		display: inline;
-		animation: fade-in 2s;
-		-webkit-animation: fade-in 2s;
+		animation: fade-in 1s;
+		-webkit-animation: fade-in 1s;
 	}
 
 	.section:not(:focus-within) .hidden.did-fade-in {
 		display: inline;
-		animation: fade-out 1s ease-out;
-		-webkit-animation: fade-out 1s ease-out;
+		animation: fade-out 0.25s ease-out;
+		-webkit-animation: fade-out 0.25s ease-out;
+	}
+
+	.section:not(:focus-within) .hide.did-fade-in {
+		display: inline;
+		animation: fade-in 1s ease-in-out;
+		-webkit-animation: fade-in 1s ease-in-out;
 	}
 
 	@keyframes fade-in {
@@ -478,6 +484,7 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 
 	/* Description text */
 	.description {
+		position: absolute;
 		margin-top: 2rem;
 		font-family: var(--font-body);
 		font-weight: var(--weight-regular);
