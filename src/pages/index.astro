@@ -92,7 +92,7 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 					<Productions
 						title="Darts (Working Title), Sky"
 						description="Assistant Producer, Dorothy St Pictures, 2023"
-						thumbnailUrl="/src/assets/pictures/promos/Vogue The 90s Promo.png"
+						thumbnailUrl="/src/assets/pictures/promos/Sky Sports Darts.png"
 						videoUrl=""
 					/>
 
@@ -461,10 +461,16 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		-webkit-animation: fade-out 0.25s ease-out;
 	}
 
+	.section:focus-within .hide{
+		display: none;
+		animation: fade-out 0.25s ease-in-out;
+		-webkit-animation: fade-out 0.25s ease-in-out;
+	}
+
 	.section:not(:focus-within) .hide.did-fade-in {
 		display: inline;
-		animation: fade-in 1s ease-in-out;
-		-webkit-animation: fade-in 1s ease-in-out;
+		animation: fade-in 0.75s ease-in-out;
+		-webkit-animation: fade-in 0.75s ease-in-out;
 	}
 
 	@keyframes fade-in {
