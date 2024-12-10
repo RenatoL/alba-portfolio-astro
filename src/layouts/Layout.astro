@@ -1,4 +1,6 @@
 ---
+import CreatedBy from '../components/CreatedBy.astro';
+
 interface Props {
 	title: string;
 }
@@ -17,8 +19,10 @@ const { title } = Astro.props;
 <div class="credits-tab">
     <button class="credits-button" aria-label="View credits">Credits</button>
     <div class="credits-content">
-        <h3>Website Credits</h3>
-        <p>Design & Development by Renato</p>
+        <p>Design & Development by</p>
+        <div class="signature">
+          <CreatedBy />
+        </div>
         <p>© 2024 Alba Lily Phillips</p>
     </div>
 </div>
@@ -179,11 +183,10 @@ const { title } = Astro.props;
     transition: all 0.3s ease;
 }
 
-.credits-content h3 {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    margin: 0 0 0.5rem 0;
-    color: #002FA7;
+.signature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .credits-content p {
@@ -191,6 +194,8 @@ const { title } = Astro.props;
     font-size: 0.9rem;
     margin: 0.25rem 0;
     color: #333;
+    text-align: left;
+    text-wrap: nowrap;
 }
 
 .credits-tab:hover .credits-content {
@@ -210,4 +215,5 @@ const { title } = Astro.props;
         font-size: 0.8rem;
     }
 }
+
 </style>
