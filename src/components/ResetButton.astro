@@ -37,9 +37,12 @@
 <script>
   const resetButton = document.getElementById('resetButton');
   resetButton?.addEventListener('click', () => {
-    // Remove focus from any focused element
+  /*   // Remove focus from any focused element
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
-    }
+    } */
+    window.location.reload()
   });
+
+  
 </script>
