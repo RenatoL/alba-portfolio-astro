@@ -4,6 +4,7 @@ import LoadingOverlay from '../components/LoadingOverlay.astro';
 import albaProfile from "/src/assets/pictures/alba.jpg";
 import Productions from '../components/Productions.astro';
 import ResetButton from '../components/ResetButton.astro';
+import { Image } from 'astro:assets';
 import { basename } from 'path';
 // Add image collection
 const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
@@ -61,11 +62,14 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 						const filename = image.default.src.split('/').pop().split('.')[0];
 						return (
 							<div class="gallery-item-container">
-								<img 
-									src={image.default.src} 
+								<Image 
+									src={image.default}
 									alt="Behind the scenes photo" 
 									class="gallery-item"
-									loading="lazy"
+									width={800}
+									height={600}
+									format="webp"
+									quality={80}
 								/>
 								<div class="image-caption">{filename}</div>
 							</div>
