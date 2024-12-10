@@ -18,7 +18,9 @@ const { title } = Astro.props;
 <slot/>
 <div class="credits-tab">
     <div class="credits-pull-tab" aria-label="View credits">
-        <span>Credits</span>
+      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 16 4-4-4-4m6 8 4-4-4-4"/>
+      </svg>
     </div>
     <div class="credits-content">
         <p>Design & Development by</p>
@@ -145,8 +147,8 @@ const { title } = Astro.props;
 <style>
 .credits-tab {
     position: fixed;
-    top: 50%;
-    right: 0;
+    top: 90%;
+    left: 0;
     transform: translateY(-50%);
     z-index: 1000;
     display: flex;
@@ -154,28 +156,28 @@ const { title } = Astro.props;
 }
 
 .credits-pull-tab {
-    background: #002FA7;
-    color: white;
+    background: #f6eeee;
+    color: #002FA7;
     padding: 12px 8px;
     cursor: pointer;
     font-family: var(--font-body);
     font-size: 0.9rem;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    transform-origin: right center;
+    transform-origin: left center;
     transition: all 0.3s ease;
-    border-radius: 8px 0 0 8px;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    border-radius: 0px 8px 8px 0px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
 }
 
 .credits-pull-tab:hover {
-    background: #001F75;
-    padding-right: 12px;
+    background: #f8f8f8;
+    padding-left: 12px;
 }
 
 .credits-content {
     position: absolute;
-    right: 100%;
+    left: 100%;
     background: white;
     padding: 1.5rem;
     border-radius: 8px 0 0 8px;
