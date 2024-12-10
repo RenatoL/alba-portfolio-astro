@@ -456,6 +456,16 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		}
 	}
 
+	.section:not(:focus-within) .letter.hidden { 
+         writing-mode: vertical-lr;                                                                               
+         text-orientation: sideways-right;                                                                                 
+         white-space: normal;                                                                                     
+         word-wrap: break-word;                                                                                   
+         opacity: 1;                                                                                            
+         width: 1rem;  
+		 font-size: 5rem;
+     }                                 
+
 
 	.section:focus-within .hidden{
 		display: inline;
@@ -463,22 +473,22 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		-webkit-animation: fade-in 1s;
 	}
 
-	.section:not(:focus-within) .hidden.did-fade-in {
+	.section:not(:focus-within) .letter.hidden.did-fade-in {
 		display: inline;
-		animation: fade-out 0.25s ease-out;
-		-webkit-animation: fade-out 0.25s ease-out;
+		/* animation: fade-out 0.25s ease-out;
+		-webkit-animation: fade-out 0.25s ease-out; */
 	}
 
-	.section:focus-within .hide{
+	.section:focus-within .letter.hide{
 		display: none;
 		animation: fade-out 0.25s ease-in-out;
 		-webkit-animation: fade-out 0.25s ease-in-out;
 	}
 
 	.section:not(:focus-within) .hide.did-fade-in {
-		display: inline;
-		animation: fade-in 0.75s ease-in-out;
-		-webkit-animation: fade-in 0.75s ease-in-out;
+		display: none;
+		/* animation: fade-in 0.75s ease-in-out;
+		-webkit-animation: fade-in 0.75s ease-in-out; */
 	}
 
 	@keyframes fade-in {
