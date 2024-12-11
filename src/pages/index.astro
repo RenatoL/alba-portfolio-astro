@@ -5,23 +5,8 @@ import albaProfile from "/src/assets/pictures/alba.jpg";
 import Productions from '../components/Productions.astro';
 import ResetButton from '../components/ResetButton.astro';
 import { Image } from 'astro:assets';
-import { basename } from 'path';
 // Add image collection
-const galleryImages = Object.values(import.meta.glob<{ default: ImageMetadata }>("/src/assets/pictures/bts/*", { eager: true }));
-// Define custom image order
-const imageOrder = [
-  "Hot Air Balloon scene on BBC1’s “Anton & Giovanni's Adventures in Spain”",
-  "Searching for Spain Eva Longoria Catalonia Team Photo", 
-  "Searching for Spain Eva Longoria Mexico City Team Photo",
-  // Add more filenames here to control order
-];
-
-// Sort gallery images based on defined order
-const sortedGalleryImages = galleryImages.sort((a, b) => {
-  const aName = basename(a.default.src, '.jpg');
-  const bName = basename(b.default.src, '.jpg');
-  return imageOrder.indexOf(aName) - imageOrder.indexOf(bName);
-});
+const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 ---
 
 <Layout title="Alba's Portfolio">
@@ -57,7 +42,7 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 					<span class="letter hidden">Gallery</span>
 				</div>
 				<div class="gallery hidden">
-					{sortedGalleryImages.map((image) => {
+					{galleryImages.map((image) => {
 						const filename = image.default.src.split('/').pop().split('.')[0];
 						return (
 							<div class="gallery-item-container">
@@ -87,49 +72,49 @@ const sortedGalleryImages = galleryImages.sort((a, b) => {
 					<Productions
 					title="Eva Longoria: Searching for Spain, CNN"
 					description="Producer, Hyphenate / Dragonfly, 2024"
-					thumbnailUrl="/src/assets/pictures/promos/Eva Longoria Searching for Spain Promo.png"
+					thumbnailUrl="/promos/Eva Longoria Searching for Spain Promo"
 					videoUrl=""
 				/>
 
 					<Productions
 						title="In Vogue: The 90s, Disney+"
 						description="Assistant Producer, Raw TV, 2023"
-						thumbnailUrl="/src/assets/pictures/promos/Vogue The 90s Promo.png"
+						thumbnailUrl="/promos/Vogue The 90s Promo.png"
 						videoUrl="/videos/In Vogue Trailer.mp4"
 					/>
 
 					<Productions
 						title="Darts (Working Title), Sky"
 						description="Assistant Producer, Dorothy St Pictures, 2023"
-						thumbnailUrl="/src/assets/pictures/promos/Sky Sports Darts.png"
+						thumbnailUrl="/promos/Sky Sports Darts.png"
 						videoUrl=""
 					/>
 
 					<Productions
 						title="Monty Don's Spanish Gardens, BBC2"
 						description="Assistant Producer, AHA Productions, 2022"
-						thumbnailUrl="/src/assets/pictures/promos/Monty Don Spanish Gardens Promo.png"
+						thumbnailUrl="/promos/Monty Don Spanish Gardens Promo.png"
 						videoUrl="/videos/Monty Don Spanish Gardens S1E1P1.mp4"
 					/>
 
 					<Productions
 						title="Space Jump: The Legacy of Red Bull Stratos, Discovery+"
 						description="Producer, Supercollider / Red Bull, 2022"
-						thumbnailUrl="/src/assets/pictures/promos/Red Bull Stratos Promo.png"
+						thumbnailUrl="/promos/Red Bull Stratos Promo.png"
 						videoUrl=""
 					/>
 
 					<Productions
 						title="EMMY Nominated Eva Longoria: Searching for Mexico, CNN"
 						description="Senior Assistant Producer, Raw TV, 2021"
-						thumbnailUrl="/src/assets/pictures/promos/Eva Longoria Searching for Mexico Promo.jpeg"
+						thumbnailUrl="/promos/Eva Longoria Searching for Mexico Promo.jpeg"
 						videoUrl="/videos/Eva Longoria Mexico Trailer.mp4"
 					/>
 
 					<Productions
 						title="Escape to the Chateau, Channel 4"
 						description="Assistant Producer, Kindling Media, 2020"
-						thumbnailUrl="/src/assets/pictures/promos/Escape To The Chateau DIY Promo.jpg"
+						thumbnailUrl="/promos/Escape To The Chateau DIY Promo.jpg"
 						videoUrl="/videos/Escape To The Chateau DIY Trailer.mp4"
 					/>
 				</div>
