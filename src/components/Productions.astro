@@ -10,6 +10,9 @@ export interface Props {
 }
 
 const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
+
+const images = Object.values(import.meta.glob<{ default: ImageMetadata }>("/src/assets/pictures/promos/*", { eager: true }));
+const image = images.find(img => img.default.src.includes(thumbnailUrl));
 ---
 
 <div class="production-container">
@@ -18,12 +21,12 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
       <>
         <div class="thumbnail-overlay">
           <Image 
-            src={thumbnailUrl} 
+            src={image.default} 
             alt={title}
             width={1280}
             height={720}
             format="webp"
-            quality={85}
+            quality={80}
             densities={[1, 2]}
             loading="lazy"
           />
@@ -37,9 +40,11 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
         <div id="embed" class="video-embed hidden">
           <video 
             controls
+            controlslist="nofullscreen noremoteplay"
             preload="metadata"
-            poster={posterUrl || thumbnailUrl}
             tabindex="-1"
+            disablepictureinpicture="true"
+            disableRemotePlayback="true"
           >
             <source src={videoUrl} type="video/mp4">
             Your browser does not support the video tag.
@@ -49,12 +54,12 @@ const { title, description, thumbnailUrl, videoUrl, posterUrl } = Astro.props;
     ) : (
       <div class="image-only">
         <Image 
-          src={thumbnailUrl} 
+          src={image.default} 
           alt={title}
           width={1280}
           height={720}
           format="webp"
-          quality={85}
+          quality={80}
           densities={[1, 2]}
           loading="lazy"
         />
