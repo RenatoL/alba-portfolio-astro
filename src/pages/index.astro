@@ -16,7 +16,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 		  <ResetButton />
 			<div class="section section-a" tabindex="1">
 				<div class="letter-container">
-					<span class="letter hide">A</span>
+					<span id="initial" class="letter hide">A</span>
 					<span class="letter hidden">About me</span>
 				</div>
 
@@ -38,7 +38,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			
 			<div class="section section-l" tabindex="2">
 				<div class="letter-container">
-					<span class="letter hide">L</span>
+					<span id="initial" class="letter hide">L</span>
 					<span class="letter hidden">Gallery</span>
 				</div>
 				<div class="gallery hidden">
@@ -64,7 +64,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			
 			<div class="section section-b" tabindex="3">
 				<div class="letter-container">
-					<span class="letter hide">B</span>
+					<span id="initial" class="letter hide">B</span>
 					<span class="letter hidden">Productions</span>
 				</div>
 				<div class="description hide">Alba Lily Phillips, Producer (Unscripted)</div>
@@ -123,7 +123,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 			
 			<div class="section section-a" tabindex="4">
 				<div class="letter-container">
-					<span class="letter hide">A</span>
+					<span id="initial" class="letter hide">A</span>
 					<span class="letter hidden">Contact</span>
 				</div>
 				<div class="hidden about">
@@ -231,7 +231,10 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 
 	.section:focus-within .hide {
 		display: none;
-		transition: fade-out 2s ease-out;
+		animation: fade-in 1s;
+		-webkit-animation: fade-in 1s;
+		-moz-animation: fade-in 1s;
+		-o-animation: fade-in 1s;
 	}
 
 
@@ -245,30 +248,29 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 		 font-size: 5rem;
      }                                 
 
+	 .displaynone {
+		display:none;
+	}
 
 	.section:focus-within .hidden{
 		display: inline;
 		animation: fade-in 1s;
 		-webkit-animation: fade-in 1s;
+		-moz-animation: fade-in 1s;
+		-o-animation: fade-in 1s;
 	}
 
-	.section:not(:focus-within) .letter.hidden.did-fade-in {
+	.section:not(:focus-within) .letter.hidden.did-fade {
 		display: inline;
 	}
 
-	.section:focus-within .letter.hide{
+/* 	.section:not(:focus-within) .letter.hide.did-fade {
 		display: none;
-		animation: fade-out 0.25s ease-in-out;
-		-webkit-animation: fade-out 0.25s ease-in-out;
-	}
-
-	.section:not(:focus-within) .hide.did-fade-in {
-		display: none;
-	}
+	} */
 
 	@keyframes fade-in {
-		from {opacity: 0;}
-		to {opacity: 1;	}
+		0% {opacity: 0;}
+		100% {opacity: 1; }
 	}
 
 	@keyframes fade-out {
@@ -279,6 +281,11 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 	@-webkit-keyframes fade-out {
 		0% { opacity: 1; transform: translateX(0); }
 		100% { opacity: 0; transform: translateX(10px); }
+	}
+
+	@-webkit-keyframes fade-in {
+		0% { opacity: 0; transform: translateX(0); }
+		100% { opacity: 1; transform: translateX(10px); }
 	}
 
 	.letter {
@@ -636,15 +643,25 @@ define:vars={{ image: `url(${albaProfile.src})` }}
 // We need to keep track of faded in elements so we can apply fade out later in CSS
 document.addEventListener('animationstart', function (e) {
   if (e.animationName === 'fade-in') {
-      e.target.classList.add('did-fade-in');
+      e.target.classList.add('did-fade');
   }
 });
 
 document.addEventListener('animationend', function (e) {
   if (e.animationName === 'fade-out') {
-      e.target.classList.remove('did-fade-in');
+      e.target.classList.remove('did-fade');
    }
 });
+
+const initials = document.querySelectorAll('#initial')
+initials.forEach(initial => {
+	const section = initial.closest('.section');
+	section.addEventListener('focus', function(e) {
+	initial.classList.add('displaynone')
+	});
+});
+
+
 
 </script>
 
