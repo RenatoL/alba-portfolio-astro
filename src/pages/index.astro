@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import LoadingOverlay from '../components/LoadingOverlay.astro';
 import albaProfile from "/src/assets/pictures/alba.jpg";
-import Productions from '../components/Productions.astro';
+import ProductionCard from '../components/Productions.astro';
 import ResetButton from '../components/ResetButton.astro';
 import { Image } from 'astro:assets';
+
+import { getCollection } from 'astro:content';                                                                                                                                                                                                                                                 
+ const productions = await getCollection('productions'); 
 // Add image collection
 const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 ---
@@ -69,7 +72,15 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 				</div>
 				<div class="description hide">Alba Lily Phillips, Producer (Unscripted)</div>
 				<div class="broadcasts-content hidden">
-					<Productions
+					{productions.map((production) => (                                                                                                                                                                                                                                                           
+						<ProductionCard                                                                                                                                                                                                                                                                           
+						  title={production.data.title}                                                                                                                                                                                                                                                            
+						  description={production.data.description}                                                                                                                                                                                                                                                
+						  thumbnailUrl={production.data.thumbnailUrl}                                                                                                                                                                                                                                              
+						  videoUrl={production.data.videoUrl}                                                                                                                                                                                                                                                       
+						/>                                                                                                                                                                                                                                                                                         
+					  ))}                                   
+					<!-- <Productions
 					title="Eva Longoria: Searching for Spain, CNN"
 					description="Producer, Hyphenate / Dragonfly, 2024"
 					thumbnailUrl="/promos/Eva Longoria Searching for Spain Promo"
@@ -116,7 +127,7 @@ const galleryImages = await Astro.glob('/src/assets/pictures/bts/*.jpg');
 						description="Assistant Producer, Kindling Media, 2020"
 						thumbnailUrl="/promos/Escape To The Chateau DIY Promo.jpg"
 						videoUrl="/videos/Escape To The Chateau DIY Trailer.mp4"
-					/>
+					/> -->
 				</div>
 
 			</div>
