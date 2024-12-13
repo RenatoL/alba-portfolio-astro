@@ -1,7 +1,9 @@
 backend:                                                                                                                                                                                                                                                                                       
    name: github                                                                                                                                                                                                                                                                            
    branch: content        
-   repo: "RenatoL/alba-portfolio-astro"                                                                                                                                                                                                                                                                         
+   repo: "RenatoL/alba-portfolio-astro"   
+   site_domain: alba-portfolio-astro.vercel.app
+   base_url: https://alba-portfolio-astro.vercel.app                                                                                                                                                                                                                                                                      
 media_folder: "src/assets/pictures/uploads" # Media files will be stored here                                                                                                                                                                                                                          
 public_folder: "/public" # The src attribute for uploaded media                                                                                                                                                                                                                       
 collections:                                                                                                                                                                                                                                                                                   
