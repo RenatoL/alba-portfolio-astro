@@ -1,5 +1,5 @@
 ---
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import SpeedInsights  from "@vercel/speed-insights/astro"
 import CreatedBy from '../components/CreatedBy.astro';
 
 interface Props {
@@ -20,6 +20,11 @@ const { title } = Astro.props;
     <link href="/src/admin/config.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <slot/>
+
+<!-- Vercel Speed Insight Component -->
+<SpeedInsights/>
+
+
 <div class="credits-tab">
     <div class="credits-pull-tab" aria-label="View credits">
       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

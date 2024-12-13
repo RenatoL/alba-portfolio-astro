@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config';
+import decapCmsOauth from "astro-decap-cms-oauth";
+
 
 defineConfig({
     image: {
@@ -7,6 +9,7 @@ defineConfig({
         entrypoint: "./src/image_endpoint.ts"
       }
     },
+    integrations: [decapCmsOauth()],
   })
 
 // https://astro.build/config
