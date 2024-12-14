@@ -9,8 +9,12 @@ defineConfig({
         entrypoint: "./src/image_endpoint.ts"
       }
     },
-    integrations: [decapCmsOauth()],
+    integrations: [decapCmsOauth({
+      adminDisabled: false,
+      oauthDisabled: false
+    })],
   })
+  
 
 // https://astro.build/config
 export default defineConfig({});

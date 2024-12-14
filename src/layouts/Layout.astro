@@ -8,6 +8,24 @@ interface Props {
 
 const { title } = Astro.props;
 
+export interface DecapCMSOptions {
+  decapCMSSrcUrl?: string;
+  decapCMSVersion?: string;
+  adminDisabled?: boolean;
+  adminRoute?: string;
+  oauthDisabled?: boolean;
+  oauthLoginRoute?: string;
+  oauthCallbackRoute?: string;
+}
+
+const defaultOptions: DecapCMSOptions = {
+  decapCMSSrcUrl: "",
+  adminDisabled: false,
+  adminRoute: "/admin",
+  oauthDisabled: false,
+  oauthLoginRoute: "/oauth",
+  oauthCallbackRoute: "/oauth/callback",
+};
 
 ---
 
