@@ -1,7 +1,7 @@
 backend:                                                                                                                                                                                                                                                                                       
    name: github                                                                                                                                                                                                                                                                            
    branch: content        
-   repo: "RenatoL/alba-portfolio-astro"   
+   repo: RenatoL/alba-portfolio-astro
    site_domain: alba-portfolio-astro.vercel.app
    base_url: https://alba-portfolio-astro.vercel.app    
    auth_endpoint: oauth                                                                                                                                                                                                                                                                  
