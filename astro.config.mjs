@@ -9,10 +9,7 @@ defineConfig({
         entrypoint: "./src/image_endpoint.ts"
       }
     },
-    integrations: [decapCmsOauth({
-      adminDisabled: false,
-      oauthDisabled: false
-    })],
+    integrations: [decapCmsOauth()],
   })
   
 
